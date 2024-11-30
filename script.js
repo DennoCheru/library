@@ -20,7 +20,7 @@ function displayBooks() {
     const libraryContainer = document.querySelector('.library');
     libraryContainer.textContent = '';
 
-    myLibrary.forEach(book => {
+    myLibrary.forEach((book, index) => {
         const bookCard = document.createElement('div');
         bookCard.classList.add('card');
         
@@ -40,8 +40,34 @@ function displayBooks() {
         readElement.textContent = `Read: ${book.read ? "Read" : "Not Read"}`;
         bookCard.appendChild(readElement);
 
+        const changeReadStatusButton = document.createElement('button');
+        changeReadStatusButton.textContent = book.read ? "Mark Unread" : "Mark Read";
+        changeReadStatusButton.classList.add('change-read-status-button');
+        changeReadStatusButton.addEventListener("click", () => {
+            toggleReadStatus(index);
+        });
+        bookCard.appendChild(changeReadStatusButton);
+
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.classList.add('remove-button');
+        removeButton.addEventListener("click", () => {
+            removeBookFromLibrary(index);
+        });
+        bookCard.appendChild(removeButton);
+
         libraryContainer.appendChild(bookCard);
     });
+}
+
+function toggleReadStatus(index) {
+    myLibrary[index].read = !myLibrary[index].read;
+    displayBooks();
+}
+
+function removeBookFromLibrary(index) {
+    myLibrary.splice(index, 1);
+    displayBooks();
 }
 
 const modal = document.querySelector("#newBookModal");

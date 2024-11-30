@@ -99,3 +99,19 @@ body {
     background-color:#451a03;
     color: #ca8a04;
 }
+
+.remove-button,
+.change-read-status-button {
+    background-color: #451a03;
+    color: #ca8a04;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.remove-button:hover {
+    background-color: #ccc;
+}
+
