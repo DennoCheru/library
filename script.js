@@ -43,6 +43,39 @@ function displayBooks() {
         libraryContainer.appendChild(bookCard);
     });
 }
+
+const modal = document.querySelector("#newBookModal");
+const newBookButton = document.querySelector("#newBookButton");
+const closeButton = document.querySelector(".close-button");
+const newBookForm = document.querySelector("#newBookForm");
+
+newBookButton.addEventListener("click", () => {
+    modal.style.display = "block";
+});
+
+closeButton.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+});
+
+newBookForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    
+    const title = document.querySelector("#title").value;
+    const author = document.querySelector("#author").value;
+    const pages = document.querySelector("#pages").value;
+    const read = document.querySelector("#read").checked;
+
+    addBookToLibrary(title,author,pages,read);
+    displayBooks();
+    modal.style.display = "none";
+});
+
 addBookToLibrary("To Kill a Mockingbird", "Harper Lee", 281, true); 
 addBookToLibrary("1984", "George Orwell", 328, false);
 addBookToLibrary("Pride and Prejudice", "Jane Austen", 279, true);
