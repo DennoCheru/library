@@ -33,8 +33,6 @@ class Library {
     }
 }
 
-const myLibrary = new Library();
-
 class DisplayController {
     constructor(library) {
         this.library = library;
@@ -125,6 +123,8 @@ class DisplayController {
         });
     }
 }
+
+const myLibrary = new Library();
 
 const displayController = new DisplayController(myLibrary);
 
