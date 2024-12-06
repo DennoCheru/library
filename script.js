@@ -11,12 +11,29 @@ class Book {
     }
 }
 
-const myLibrary = [];
+class Library {
+    constructor() {
+        this.books = [];
+    }
 
-function addBookToLibrary(title, author, pages, read) {
-    const newBook = new Book(title, author, pages, read);
-    myLibrary.push(newBook);
+    addBook(book) {
+        this.books.push(book)
+    }
+
+    removeBook(index) {
+        this.books.splice(index, 1);
+    }
+
+    toggleReadStatus(index) {
+        this.books[index].read = !this.books[index].read;
+    }
+
+    getBooks() {
+        return this.books;
+    }
 }
+
+const myLibrary = new Library();
 
 function displayBooks() {
     const libraryContainer = document.querySelector('.library');
@@ -62,15 +79,6 @@ function displayBooks() {
     });
 }
 
-function toggleReadStatus(index) {
-    myLibrary[index].read = !myLibrary[index].read;
-    displayBooks();
-}
-
-function removeBookFromLibrary(index) {
-    myLibrary.splice(index, 1);
-    displayBooks();
-}
 
 const modal = document.querySelector("#newBookModal");
 const newBookButton = document.querySelector("#newBookButton");
@@ -104,11 +112,11 @@ newBookForm.addEventListener("submit", (event) => {
     modal.style.display = "none";
 });
 
-addBookToLibrary("To Kill a Mockingbird", "Harper Lee", 281, true); 
-addBookToLibrary("1984", "George Orwell", 328, false);
-addBookToLibrary("Pride and Prejudice", "Jane Austen", 279, true);
-addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 180, false);
-addBookToLibrary("Moby-Dick", "Herman Melville", 585, true);
-addBookToLibrary("War and Peace", "Leo Tolstoy", 1225, false);
+myLibrary.addBook(new Book("To Kill a Mockingbird", "Harper Lee", 281, true)); 
+myLibrary.addBook(new Book("1984", "George Orwell", 328, false));
+myLibrary.addBook(new Book("Pride and Prejudice", "Jane Austen", 279, true));
+myLibrary.addBook(new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, false));
+myLibrary.addBook(new Book("Moby-Dick", "Herman Melville", 585, true));
+myLibrary.addBook(new Book("War and Peace", "Leo Tolstoy", 1225, false));
 
 displayBooks();
