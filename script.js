@@ -126,39 +126,7 @@ class DisplayController {
     }
 }
 
-const DisplayController = new DisplayController(myLibrary);
-
-const modal = document.querySelector("#newBookModal");
-const newBookButton = document.querySelector("#newBookButton");
-const closeButton = document.querySelector(".close-button");
-const newBookForm = document.querySelector("#newBookForm");
-
-newBookButton.addEventListener("click", () => {
-    modal.style.display = "block";
-});
-
-closeButton.addEventListener("click", () => {
-    modal.style.display = "none";
-});
-
-window.addEventListener("click", (event) => {
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-});
-
-newBookForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    
-    const title = document.querySelector("#title").value;
-    const author = document.querySelector("#author").value;
-    const pages = document.querySelector("#pages").value;
-    const read = document.querySelector("#read").checked;
-
-    addBookToLibrary(title,author,pages,read);
-    displayBooks();
-    modal.style.display = "none";
-});
+const displayController = new DisplayController(myLibrary);
 
 myLibrary.addBook(new Book("To Kill a Mockingbird", "Harper Lee", 281, true)); 
 myLibrary.addBook(new Book("1984", "George Orwell", 328, false));
@@ -167,4 +135,4 @@ myLibrary.addBook(new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, false
 myLibrary.addBook(new Book("Moby-Dick", "Herman Melville", 585, true));
 myLibrary.addBook(new Book("War and Peace", "Leo Tolstoy", 1225, false));
 
-displayBooks();
+displayController.displayBooks();
