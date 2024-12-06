@@ -17,7 +17,7 @@ class Library {
     }
 
     addBook(book) {
-        this.books.push(book)
+        this.books.push(book);
     }
 
     removeBook(index) {
