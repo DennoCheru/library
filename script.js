@@ -67,6 +67,10 @@ class DisplayController {
     }
 
     addBookFromForm() {
+        if (!this.validateForm()) {
+            return;
+        }
+
         const title = document.querySelector('#title').value;
         const author = document.querySelector('#author').value;
         const pages = document.querySelector('#pages').value;
@@ -74,6 +78,7 @@ class DisplayController {
 
         const newBook = new Book(title, author, pages, read);
         this.library.addBook(newBook);
+
         this.displayBooks();
         this.modal.style.display = "none";
     }
@@ -121,6 +126,41 @@ class DisplayController {
 
             this.libraryContainer.appendChild(bookCard);
         });
+    }
+
+    validateForm() {
+        const title = document.querySelector('#title').value.trim();
+        const author = document.querySelector('#author').value.trim();
+        const pages = document.querySelector('#pages').value.trim();
+
+        let isValid = true;
+
+        document.querySelectorAll('.error-message').forEach(el => el.remove());
+
+        if (!title) {
+            this.showError('#title', 'Title is required');
+            isValid = false;
+        }
+
+        if (!author) {
+            this.showError('#author', 'Author is required');
+            isValid = false;
+        }
+
+        if (!pages || isNaN(pages) || Number(pages) <= 0 || !Number.isInteger(Number(pages))) {
+            this.showError('#pages', 'Please enter a valid number of pages');
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    showError(inputSelector, message) {
+        const inputElement = document.querySelector(inputSelector);
+        const errorElement = document.createElement('p');
+        errorElement.classList.add('error-message');
+        errorElement.textContent = message;
+        inputElement.parentNode.insertBefore(errorElement, inputElement.nextSibling);
     }
 }
 

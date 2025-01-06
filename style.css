@@ -59,8 +59,14 @@ body {
     border-radius: 5px;
     padding: 5px;
     margin: 5px;
+    width: 100%;
 }
 
+.modal label {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+}
 .close-button {
     color: #451a03;
     float: right;
@@ -113,5 +119,11 @@ body {
 
 .remove-button:hover {
     background-color: #ccc;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
 }
 
